@@ -29,8 +29,16 @@ class TaskController extends Controller
     }
 
     public function create()
-{
-    return view('tasks.create');
-}
+    {
+        return view('tasks.create');
+    }
+
+    public function destroy($id)
+    {
+        $tasks = Task::findOrFail($id);
+        $tasks->delete();
+
+        return redirect()->route('tasks.index')->with('success', 'Tarea eliminada!');
+    }
 
 }
